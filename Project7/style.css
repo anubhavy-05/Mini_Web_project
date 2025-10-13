@@ -1,0 +1,391 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.loader-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Orbital Loader */
+.orbital-loader {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.orbit {
+    position: absolute;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-top: 2px solid #00ff88;
+    border-right: 2px solid #00ff88;
+    animation: rotate 3s linear infinite;
+}
+
+.orbit-1 {
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 2s;
+}
+
+.orbit-2 {
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 3s;
+    animation-direction: reverse;
+    border-top-color: #ff0080;
+    border-right-color: #ff0080;
+}
+
+.orbit-3 {
+    width: 240px;
+    height: 240px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 4s;
+    border-top-color: #0080ff;
+    border-right-color: #0080ff;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 20px currentColor;
+}
+
+.planet-1 {
+    width: 12px;
+    height: 12px;
+    background: #00ff88;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: glow-green 2s ease-in-out infinite alternate;
+}
+
+.planet-2 {
+    width: 16px;
+    height: 16px;
+    background: #ff0080;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: glow-pink 3s ease-in-out infinite alternate;
+}
+
+.planet-3 {
+    width: 14px;
+    height: 14px;
+    background: #0080ff;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: glow-blue 4s ease-in-out infinite alternate;
+}
+
+.center-core {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffffff 0%, #00ff88 50%, #0080ff 100%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: core-pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+/* Pulsing Rings */
+.pulse-rings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.ring {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-ring 4s ease-in-out infinite;
+}
+
+.ring-1 {
+    width: 200px;
+    height: 200px;
+    animation-delay: 0s;
+}
+
+.ring-2 {
+    width: 250px;
+    height: 250px;
+    animation-delay: 0.5s;
+}
+
+.ring-3 {
+    width: 300px;
+    height: 300px;
+    animation-delay: 1s;
+}
+
+.ring-4 {
+    width: 350px;
+    height: 350px;
+    animation-delay: 1.5s;
+}
+
+/* Floating Particles */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.particle-1 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+    animation-duration: 5s;
+}
+
+.particle-2 {
+    top: 30%;
+    right: 15%;
+    animation-delay: 1s;
+    animation-duration: 6s;
+}
+
+.particle-3 {
+    bottom: 25%;
+    left: 15%;
+    animation-delay: 2s;
+    animation-duration: 7s;
+}
+
+.particle-4 {
+    bottom: 20%;
+    right: 20%;
+    animation-delay: 3s;
+    animation-duration: 5.5s;
+}
+
+.particle-5 {
+    top: 50%;
+    left: 10%;
+    animation-delay: 1.5s;
+    animation-duration: 6.5s;
+}
+
+.particle-6 {
+    top: 60%;
+    right: 10%;
+    animation-delay: 2.5s;
+    animation-duration: 5.8s;
+}
+
+/* Loading Text */
+.loading-text {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.loading-text span {
+    display: inline-block;
+    animation: text-wave 2s ease-in-out infinite;
+    background: linear-gradient(45deg, #00ff88, #0080ff, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.loading-text span:nth-child(1) { animation-delay: 0.1s; }
+.loading-text span:nth-child(2) { animation-delay: 0.2s; }
+.loading-text span:nth-child(3) { animation-delay: 0.3s; }
+.loading-text span:nth-child(4) { animation-delay: 0.4s; }
+.loading-text span:nth-child(5) { animation-delay: 0.5s; }
+.loading-text span:nth-child(6) { animation-delay: 0.6s; }
+.loading-text span:nth-child(7) { animation-delay: 0.7s; }
+
+/* Animations */
+@keyframes rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes glow-green {
+    0% { 
+        box-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+        transform: translateX(-50%) scale(1);
+    }
+    100% { 
+        box-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+@keyframes glow-pink {
+    0% { 
+        box-shadow: 0 0 20px #ff0080, 0 0 40px #ff0080;
+        transform: translateX(-50%) scale(1);
+    }
+    100% { 
+        box-shadow: 0 0 30px #ff0080, 0 0 60px #ff0080;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+@keyframes glow-blue {
+    0% { 
+        box-shadow: 0 0 20px #0080ff, 0 0 40px #0080ff;
+        transform: translateX(-50%) scale(1);
+    }
+    100% { 
+        box-shadow: 0 0 30px #0080ff, 0 0 60px #0080ff;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+@keyframes core-pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-40px) rotate(180deg);
+        opacity: 0.7;
+    }
+    75% {
+        transform: translateY(-20px) rotate(270deg);
+        opacity: 1;
+    }
+}
+
+@keyframes text-wave {
+    0%, 100% {
+        transform: translateY(0px);
+        text-shadow: 0 0 10px currentColor;
+    }
+    50% {
+        transform: translateY(-10px);
+        text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+}
+
+/* Additional mesmerizing effects */
+@keyframes background-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 255, 198, 0.3) 0%, transparent 50%);
+    animation: background-shift 10s ease infinite;
+    pointer-events: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .loader-container {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .orbital-loader {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .orbit-1 { width: 80px; height: 80px; }
+    .orbit-2 { width: 120px; height: 120px; }
+    .orbit-3 { width: 160px; height: 160px; }
+    
+    .loading-text {
+        font-size: 18px;
+        bottom: -60px;
+    }
+}
