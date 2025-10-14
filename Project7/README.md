@@ -21,34 +21,6 @@ Project7/
 3. Ensure the stylesheet is linked: `<link rel="stylesheet" href="style.css">`  
 4. Open `index.html` in a browser.
 
-### Loader Markup Snippet
-```html
-<div class="loader-container" role="status" aria-live="polite" aria-label="Content is loading">
-	<div class="orbital-loader">
-		<div class="orbit orbit-1"><div class="planet planet-1"></div></div>
-		<div class="orbit orbit-2"><div class="planet planet-2"></div></div>
-		<div class="orbit orbit-3"><div class="planet planet-3"></div></div>
-		<div class="center-core"></div>
-	</div>
-	<div class="pulse-rings">
-		<div class="ring ring-1"></div>
-		<div class="ring ring-2"></div>
-		<div class="ring ring-3"></div>
-		<div class="ring ring-4"></div>
-	</div>
-	<div class="particles">
-		<div class="particle particle-1"></div>
-		<div class="particle particle-2"></div>
-		<div class="particle particle-3"></div>
-		<div class="particle particle-4"></div>
-		<div class="particle particle-5"></div>
-		<div class="particle particle-6"></div>
-	</div>
-	<div class="loading-text" aria-hidden="true">
-		<span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
-	</div>
-</div>
-```
 
 ## ✨ Features
 
@@ -104,19 +76,7 @@ Consider honoring the user's OS reduce‑motion setting:
 
 Below `768px` the loader scales down (see media query in `style.css`), reducing ring diameters and font size. You can add further breakpoints if needed.
 
-## ⚙️ Integration Pattern (Lazy Content Load)
 
-```html
-<div id="loader-wrapper"> ...loader markup here... </div>
-<main id="app" hidden> <!-- actual app --> </main>
-<script>
-	// Simulate async work
-	setTimeout(() => {
-		document.getElementById('loader-wrapper').remove();
-		document.getElementById('app').hidden = false;
-	}, 2000);
-</script>
-```
 
 ## 🔧 Performance Tips
 
