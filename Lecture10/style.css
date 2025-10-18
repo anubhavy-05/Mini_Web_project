@@ -43,3 +43,66 @@ body {
     animation: rotate3d 20s linear infinite;
 }
 
+/* ===================================
+   STEP 4: Cart Body (Main Container)
+   =================================== */
+.cart-body {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%);
+}
+
+/* ===================================
+   STEP 5: Cart Faces (3D Cube Sides)
+   =================================== */
+.face {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    border: 3px solid #c92a2a;
+    opacity: 0.9;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.face.front {
+    transform: translateZ(75px);
+}
+
+.face.back {
+    transform: translateZ(-75px) rotateY(180deg);
+}
+
+.face.left {
+    width: 150px;
+    transform: translateX(-75px) rotateY(-90deg);
+}
+
+.face.right {
+    width: 150px;
+    transform: translateX(125px) rotateY(90deg);
+}
+
+.face.bottom {
+    transform: translateY(75px) rotateX(-90deg);
+}
+
+/* Add grid pattern to faces */
+.face::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(255, 255, 255, 0.1) 20px,
+        rgba(255, 255, 255, 0.1) 22px
+    );
+}
+
