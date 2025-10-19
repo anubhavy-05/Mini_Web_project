@@ -225,4 +225,61 @@
             }, 500);
         });
 
-        
+        function updatePosition(pos) {
+            document.querySelectorAll('.token').forEach(t => t.remove());
+            
+            if (currentPlayer === 1) {
+                player1Position = pos;
+                p1Pos.textContent = pos;
+            } else {
+                player2Position = pos;
+                p2Pos.textContent = pos;
+            }
+            
+            if (player1Position > 0) {
+                const cell = document.querySelector(`[data-cell="${player1Position}"]`);
+                const token = document.createElement('div');
+                token.className = 'token red-token';
+                token.textContent = '1';
+                cell.appendChild(token);
+            }
+            
+            if (player2Position > 0) {
+                const cell = document.querySelector(`[data-cell="${player2Position}"]`);
+                const token = document.createElement('div');
+                token.className = 'token blue-token';
+                token.textContent = '2';
+                cell.appendChild(token);
+            }
+        }
+
+        function checkWin() {
+            const pos = currentPlayer === 1 ? player1Position : player2Position;
+            if (pos === 100) {
+                message.textContent = `🎉 Player ${currentPlayer} WINS! 🎉`;
+                rollBtn.disabled = true;
+            } else {
+                setTimeout(switchPlayer, 1500);
+            }
+        }
+
+        function switchPlayer() {
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            turnInfo.textContent = `Player ${currentPlayer}'s Turn`;
+        }
+
+        resetBtn.addEventListener('click', () => {
+            player1Position = 0;
+            player2Position = 0;
+            currentPlayer = 1;
+            p1Pos.textContent = '0';
+            p2Pos.textContent = '0';
+            turnInfo.textContent = "Player 1's Turn";
+            message.textContent = 'Click Roll Dice to start!';
+            dice.textContent = '1';
+            rollBtn.disabled = false;
+            document.querySelectorAll('.token').forEach(t => t.remove());
+        });
+    </script>
+</body>
+</html>
