@@ -156,4 +156,73 @@
             <div class="cell" data-cell="10">10</div>
         </div>
 
-       
+        <button class="btn reset-btn" id="resetBtn">New Game</button>
+    </div>
+
+    <script>
+        let currentPlayer = 1;
+        let player1Position = 0;
+        let player2Position = 0;
+
+        const snakes = {
+            98: 28,
+            87: 36,
+            75: 32,
+            54: 19,
+            62: 18
+        };
+
+        const ladders = {
+            4: 25,
+            13: 46,
+            33: 49,
+            42: 63,
+            50: 69,
+            68: 91
+        };
+
+        const rollBtn = document.getElementById('rollBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const dice = document.getElementById('dice');
+        const message = document.getElementById('message');
+        const turnInfo = document.getElementById('turnInfo');
+        const p1Pos = document.getElementById('p1-pos');
+        const p2Pos = document.getElementById('p2-pos');
+
+        rollBtn.addEventListener('click', () => {
+            const diceValue = Math.floor(Math.random() * 6) + 1;
+            dice.textContent = diceValue;
+            
+            const currentPos = currentPlayer === 1 ? player1Position : player2Position;
+            let newPos = currentPos + diceValue;
+            
+            if (newPos > 100) {
+                message.textContent = `Player ${currentPlayer} needs exactly ${100 - currentPos} to win!`;
+                switchPlayer();
+                return;
+            }
+            
+            message.textContent = `Player ${currentPlayer} rolled ${diceValue}`;
+            
+            setTimeout(() => {
+                updatePosition(newPos);
+                
+                if (snakes[newPos]) {
+                    setTimeout(() => {
+                        message.textContent = `Snake bite! Sliding down to ${snakes[newPos]}`;
+                        updatePosition(snakes[newPos]);
+                        checkWin();
+                    }, 800);
+                } else if (ladders[newPos]) {
+                    setTimeout(() => {
+                        message.textContent = `Ladder! Climbing up to ${ladders[newPos]}`;
+                        updatePosition(ladders[newPos]);
+                        checkWin();
+                    }, 800);
+                } else {
+                    checkWin();
+                }
+            }, 500);
+        });
+
+        
