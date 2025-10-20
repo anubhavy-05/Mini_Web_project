@@ -56,4 +56,85 @@ body {
   height: 160px;
 }
 
-.
+.petal {
+  --count: 8;
+  --turn: calc(360deg / var(--count));
+  --angle: calc(var(--i) * var(--turn));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 110px;
+  transform-origin: 0 80%;
+  transform: translate(-50%, -50%) rotate(var(--angle)) scale(0.1);
+  border-radius: 60px 60px 60px 60px / 90px 90px 40px 40px;
+  background: radial-gradient(60px 80px at 60% 35%, var(--petal-2), var(--petal) 65%);
+  filter: drop-shadow(0 10px 12px rgba(0,0,0,0.15));
+  opacity: 0;
+  animation: bloom 900ms cubic-bezier(.12,.62,.22,1.15) forwards;
+  animation-delay: calc(250ms + var(--i) * 110ms);
+}
+
+/* Flower center */
+.center {
+  position: absolute;
+  bottom: 110px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe9a8, var(--center));
+  box-shadow: 0 6px 12px rgba(0,0,0,0.14);
+  transform: translateY(20px) scale(0.2);
+  opacity: 0;
+  animation: pop 700ms 1.2s ease-out forwards;
+}
+
+/* Ground shadow */
+.shadow {
+  position: absolute;
+  bottom: 0;
+  width: 140px;
+  height: 20px;
+  background: radial-gradient(60% 100% at 50% 50%, rgba(0,0,0,0.18), rgba(0,0,0,0) 70%);
+  filter: blur(1px);
+  transform: scaleX(0.1);
+  opacity: 0;
+  animation: appear 600ms 1.2s ease-out forwards;
+}
+
+/* Keyframes */
+@keyframes grow {
+  from { height: 0; }
+  to { height: 160px; }
+}
+
+@keyframes bloom {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--angle)) scale(0.1); }
+  60% { opacity: 1; transform: translate(-50%, -50%) rotate(calc(var(--angle) + 6deg)) scale(1.06); }
+  100% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--angle)) scale(1); }
+}
+
+@keyframes pop {
+  0% { opacity: 0; transform: translateY(20px) scale(0.2); }
+  70% { opacity: 1; transform: translateY(-3px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: scaleX(0.1); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1.2deg); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .stem { height: 160px; }
+  .petal { opacity: 1; transform: translate(-50%, -50%) rotate(var(--angle)) scale(1); }
+  .center { opacity: 1; transform: translateY(0) scale(1); }
+  .shadow { opacity: 1; transform: scaleX(1); }
+}
