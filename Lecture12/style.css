@@ -1,0 +1,59 @@
+:root {
+  --bg: radial-gradient(1200px 800px at 50% 100%, #e7f7ff 0%, #f7fbff 40%, #ffffff 70%);
+  --petal: #ff6fa8;
+  --petal-2: #ff8fbc;
+  --center: #ffd166;
+  --stem: #2e9d4d;
+  --leaf: #39b36d;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+}
+
+.page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.flower {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  display: grid;
+  place-items: center;
+  animation: sway 6s ease-in-out infinite;
+}
+
+/* Stem */
+.stem {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 0;
+  background: linear-gradient(#2e9d4d, #208340);
+  border-radius: 20px;
+  transform-origin: bottom center;
+  animation: grow 1.4s 0.1s ease-out forwards;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.04) inset;
+}
+
+/* Petals */
+.petals {
+  position: absolute;
+  bottom: 110px;
+  width: 160px;
+  height: 160px;
+}
+
+.
