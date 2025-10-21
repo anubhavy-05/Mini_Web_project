@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Toggle Switch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Egg Toggle Switch</h1>
+        
+        <div class="toggle-wrapper">
+            <input type="checkbox" id="toggle" class="toggle-checkbox">
+            <label for="toggle" class="toggle-label">
+                <span class="egg"></span>
+            </label>
+        </div>
+        
+        <p class="status">Status: <span id="status-text">OFF</span></p>
+    </div>
+
+    <script>
+        // Simple JavaScript to update status text
+        const toggle = document.getElementById('toggle');
+        const statusText = document.getElementById('status-text');
+        
+        toggle.addEventListener('change', function() {
+            if(this.checked) {
+                statusText.textContent = 'ON';
+                statusText.style.color = '#4CAF50';
+            } else {
+                statusText.textContent = 'OFF';
+                statusText.style.color = '#f44336';
+            }
+        });
+    </script>
+</body>
+</html>
