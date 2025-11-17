@@ -1,0 +1,249 @@
+/* Basic page styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Two column layout */
+.button-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.login-section, .logout-section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Scene with door and person */
+.scene {
+    width: 100%;
+    height: 150px;
+    background: #f0f8ff;
+    border-radius: 8px;
+    margin: 15px 0;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ddd;
+}
+
+.door {
+    width: 60px;
+    height: 120px;
+    background: #8B4513; /* Brown color */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px 5px 0 0;
+}
+
+.door::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    border-radius: 50%;
+    top: 50%;
+    right: 10px;
+}
+
+.person {
+    width: 30px;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+}
+
+.person::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ffcc99; /* Skin color */
+    border-radius: 50%;
+    top: 0;
+    left: 5px;
+}
+
+.person::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 30px;
+    background: #3498db; /* Blue shirt */
+    top: 20px;
+    left: 2.5px;
+    border-radius: 5px;
+}
+
+/* Person positions */
+.login-section .person {
+    left: 20px;
+}
+
+.logout-section .person {
+    right: 20px;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all 0.3s;
+}
+
+.login-btn {
+    background: #2ecc71; /* Green */
+    color: white;
+}
+
+.login-btn:hover {
+    background: #27ae60;
+}
+
+.logout-btn {
+    background: #e74c3c; /* Red */
+    color: white;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+.status {
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Instructions */
+.instructions {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.instructions h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.instructions p {
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Animations */
+.login-animation .person {
+    animation: loginMove 1.5s forwards;
+}
+
+.login-animation .door {
+    animation: doorOpen 1.5s forwards;
+}
+
+.logout-animation .person {
+    animation: logoutMove 1.5s forwards;
+}
+
+.logout-animation .door {
+    animation: doorOpen 1.5s forwards;
+}
+
+/* Animation definitions */
+@keyframes loginMove {
+    0% {
+        left: 20px;
+    }
+    50% {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    100% {
+        left: calc(100% - 50px);
+    }
+}
+
+@keyframes logoutMove {
+    0% {
+        right: 20px;
+    }
+    50% {
+        right: 50%;
+        transform: translateX(50%);
+    }
+    100% {
+        right: calc(100% - 50px);
+    }
+}
+
+@keyframes doorOpen {
+    0% {
+        transform: translateX(-50%) rotateY(0);
+    }
+    50% {
+        transform: translateX(-50%) rotateY(-45deg);
+    }
+    100% {
+        transform: translateX(-50%) rotateY(0);
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 650px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .login-section, .logout-section {
+        width: 100%;
+        max-width: 300px;
+    }
+}

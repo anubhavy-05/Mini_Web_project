@@ -1,0 +1,59 @@
+/* Simple Dot Navigation Menu styles - easy to read and edit */
+:root{
+  --bg: #f7f7f9;
+  --accent: #2b6cff; /* blue accent */
+  --dot-size: 16px;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: #111;
+  margin: 0;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+}
+main{
+  max-width: 520px;
+  width: 100%;
+}
+h1{
+  font-size: 1.4rem;
+  margin: 0 0 8px 0;
+}
+.intro{color:#444;margin:8px 0 18px}
+.note{color:#666;margin-top:18px;font-size:0.9rem}
+
+.dot-nav{
+  display:flex;justify-content:center;margin:16px 0 24px;
+}
+.dots{display:flex;gap:12px;list-style:none;padding:0;margin:0}
+.dot{
+  width:var(--dot-size);
+  height:var(--dot-size);
+  border-radius:50%;
+  border:2px solid rgba(0,0,0,0.12);
+  background: white;
+  cursor:pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+  outline: none;
+}
+.dot:hover{transform:scale(1.08)}
+.dot:focus{box-shadow:0 0 0 4px rgba(43,108,255,0.12);border-color:var(--accent)}
+.dot.active{
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 14px rgba(43,108,255,0.18);
+  transform: scale(1.12);
+}
+
+.panels{border-radius:8px;padding:18px;background:white;border:1px solid rgba(0,0,0,0.06);}
+.panel{display:block;padding:12px 6px}
+.panel[hidden]{display:none}
+
+/* Responsive: make dots larger on small screens for touch */
+@media (max-width:420px){
+  :root{--dot-size:20px}
+}

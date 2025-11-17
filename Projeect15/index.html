@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dot Navigation Menu — Simple Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Dot Navigation Menu</h1>
+    <p class="intro">Click or use arrow keys to move the active dot. Simple and accessible.</p>
+
+    <nav class="dot-nav" aria-label="Dot navigation" role="navigation">
+      <ul class="dots" role="list">
+        <li><button class="dot" aria-label="Item 1" data-index="0" aria-pressed="true"></button></li>
+        <li><button class="dot" aria-label="Item 2" data-index="1" aria-pressed="false"></button></li>
+        <li><button class="dot" aria-label="Item 3" data-index="2" aria-pressed="false"></button></li>
+        <li><button class="dot" aria-label="Item 4" data-index="3" aria-pressed="false"></button></li>
+        <li><button class="dot" aria-label="Item 5" data-index="4" aria-pressed="false"></button></li>
+      </ul>
+    </nav>
+
+    <section class="panels">
+      <div class="panel" data-panel="0">Panel 1 content — Home</div>
+      <div class="panel" data-panel="1">Panel 2 content — About</div>
+      <div class="panel" data-panel="2">Panel 3 content — Services</div>
+      <div class="panel" data-panel="3">Panel 4 content — Portfolio</div>
+      <div class="panel" data-panel="4">Panel 5 content — Contact</div>
+    </section>
+
+    <p class="note">This example uses only HTML, CSS and a tiny bit of JavaScript for keyboard support.</p>
+  </main>
+
+  <script>
+    // Simple script to toggle active dot and panel
+    (function () {
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      const panels = Array.from(document.querySelectorAll('.panel'));
+      let active = 0;
+
+      function setActive(index) {
+        dots.forEach((d, i) => {
+          const isActive = i === index;
+          d.classList.toggle('active', isActive);
+          d.setAttribute('aria-pressed', String(isActive));
+          d.tabIndex = isActive ? 0 : -1;
+        });
+        panels.forEach((p, i) => {
+          p.hidden = i !== index;
+        });
+        active = index;
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => setActive(i));
+        dot.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActive((active + 1) % dots.length);
+            dots[active].focus();
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActive((active - 1 + dots.length) % dots.length);
+            dots[active].focus();
+          }
+        });
+      });
+
+      // initialize
+      setActive(0);
+    })();
+  </script>
+</body>
+</html>

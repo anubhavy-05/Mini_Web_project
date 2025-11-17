@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login/Logout Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login & Logout Animation</h1>
+        
+        <div class="button-container">
+            <!-- Login Section -->
+            <div class="login-section">
+                <h2>Login</h2>
+                <div class="scene">
+                    <div class="door"></div>
+                    <div class="person"></div>
+                </div>
+                <button class="login-btn">Click to Login</button>
+                <p class="status">Not logged in</p>
+            </div>
+            
+            <!-- Logout Section -->
+            <div class="logout-section">
+                <h2>Logout</h2>
+                <div class="scene">
+                    <div class="door"></div>
+                    <div class="person"></div>
+                </div>
+                <button class="logout-btn">Click to Logout</button>
+                <p class="status">Currently logged in</p>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to use:</h3>
+            <p>• Click Login to see person enter the door</p>
+            <p>• Click Logout to see person exit the door</p>
+        </div>
+    </div>
+
+    <script>
+        
+        const loginBtn = document.querySelector('.login-btn');
+        const logoutBtn = document.querySelector('.logout-btn');
+        const loginScene = document.querySelector('.login-section .scene');
+        const logoutScene = document.querySelector('.logout-section .scene');
+        const loginStatus = document.querySelector('.login-section .status');
+        const logoutStatus = document.querySelector('.logout-section .status');
+        
+        let isLoggedIn = false;
+        
+        
+        loginBtn.addEventListener('click', function() {
+            if (!isLoggedIn) {
+        
+                loginScene.classList.add('login-animation');
+                
+            
+                loginStatus.textContent = 'Logging in...';
+                logoutStatus.textContent = 'Currently logged in';
+                
+                
+                setTimeout(() => {
+                    isLoggedIn = true;
+                    loginStatus.textContent = 'Logged in!';
+                }, 1500);
+            }
+        });
+        
+        logoutBtn.addEventListener('click', function() {
+            if (isLoggedIn) {
+            
+                logoutScene.classList.add('logout-animation');
+                
+    
+                logoutStatus.textContent = 'Logging out...';
+                loginStatus.textContent = 'Not logged in';
+                
+                
+                setTimeout(() => {
+                    isLoggedIn = false;
+                    logoutStatus.textContent = 'Logged out!';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>

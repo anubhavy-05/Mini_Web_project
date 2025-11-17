@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cursor Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <div class="container">
+        <h1>Interactive Cursor Project</h1>
+        <p>Move your cursor around to see the custom cursor. Hover over the colored boxes and buttons to see different cursor effects!</p>
+        
+        <div class="interactive-area">
+            <div class="box box1">Hover Me!</div>
+            <div class="box box2">Hover Me!</div>
+            <div class="box box3">Hover Me!</div>
+            <div class="box box4">Hover Me!</div>
+        </div>
+        
+        <div class="button-container">
+            <button class="btn">Button 1</button>
+            <button class="btn">Button 2</button>
+        </div>
+    </div>
+
+    <script>
+        
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        
+        document.addEventListener('click', () => {
+            cursor.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                cursor.style.transform = 'scale(1)';
+            }, 100);
+        });
+        
+
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover-box');
+            });
+            box.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover-box');
+            });
+        });
+        
+        
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover-btn');
+            });
+            button.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover-btn');
+            });
+        });
+    </script>
+</body>
+</html>
