@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff00;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Animated background lines */
+.line {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(transparent, #00ff00, transparent);
+    animation: moveLines 3s linear infinite;
+    opacity: 0.3;
+}
+
+.line:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.line:nth-child(2) {
+    left: 40%;
+    animation-delay: 0.5s;
+}
+
+.line:nth-child(3) {
+    left: 60%;
+    animation-delay: 1s;
+}
+
+.line:nth-child(4) {
+    left: 80%;
+    animation-delay: 1.5s;
+}
+
+@keyframes moveLines {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    z-index: 10;
+    animation: glowBox 2s ease-in-out infinite;
+}
+
+@keyframes glowBox {
+    0%, 100% {
+        box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.2);
+    }
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px #00ff00;
+}
+
+input::placeholder {
+    color: rgba(0, 255, 0, 0.5);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.login-btn:hover {
+    background: #00ff00;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px #00ff00;
+    transform: scale(1.02);
+}
+
+.login-btn:active {
+    transform: scale(0.98);
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+    color: #ff0000;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+}
