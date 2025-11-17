@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Web Projects - Live View Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .filter-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 25px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .project-type {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .project-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .search-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Mini Web Projects Dashboard</h1>
+        <p>Live Preview of All Projects & Lectures</p>
+    </div>
+
+    <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="Enter lecture or project name (e.g., 'Lecture 8', 'Project 1')...">
+    </div>
+
+    <div class="filter-section">
+        <button class="filter-btn active" onclick="filterProjects('all')">All</button>
+        <button class="filter-btn" onclick="filterProjects('project')">Projects</button>
+        <button class="filter-btn" onclick="filterProjects('lecture')">Lectures</button>
+    </div>
+
+    <div id="selectedView" style="display: none;">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button class="open-btn" onclick="clearSelection()" style="padding: 12px 30px; font-size: 16px;">
+                ← Back to All Projects
+            </button>
+        </div>
+        <div id="selectedProject"></div>
+    </div>
+
+    <div class="container" id="projectsContainer">
+        <!-- Lectures -->
+        <div class="project-card" data-type="lecture" data-name="Lecture 8">
+            <div class="project-header">
+                <span class="project-title">Lecture 8</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture8/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture8/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Lecture8/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="lecture" data-name="Lecture 9">
+            <div class="project-header">
+                <span class="project-title">Lecture 9</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture9/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture9/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Lecture9/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="lecture" data-name="Lecture 10">
+            <div class="project-header">
+                <span class="project-title">Lecture 10</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture10/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture10/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Lecture10/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="lecture" data-name="Lecture 11">
+            <div class="project-header">
+                <span class="project-title">Lecture 11</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture11/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture11/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="lecture" data-name="Lecture 12">
+            <div class="project-header">
+                <span class="project-title">Lecture 12</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture12/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture12/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Lecture12/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="lecture" data-name="Lecture 13">
+            <div class="project-header">
+                <span class="project-title">Lecture 13</span>
+                <span class="project-type">Lecture</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Lecture13/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Lecture13/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="project-card" data-type="project" data-name="Project 1 - Calculator">
+            <div class="project-header">
+                <span class="project-title">Project 1 - Calculator</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project1/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project1/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project1/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 2 - Traffic Light">
+            <div class="project-header">
+                <span class="project-title">Project 2 - Traffic Light</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project2/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project2/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project2/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 3 - Glass Morphism">
+            <div class="project-header">
+                <span class="project-title">Project 3 - Glass Morphism</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project3/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project3/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project3/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 4">
+            <div class="project-header">
+                <span class="project-title">Project 4</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project4/inde.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project4/inde.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project4/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 5">
+            <div class="project-header">
+                <span class="project-title">Project 5</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project5/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project5/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project5/README.MD" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 6">
+            <div class="project-header">
+                <span class="project-title">Project 6</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project6/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project6/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project6/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 7">
+            <div class="project-header">
+                <span class="project-title">Project 7</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project7/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project7/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project7/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 14">
+            <div class="project-header">
+                <span class="project-title">Project 14</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project14/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project14/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project14/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 15">
+            <div class="project-header">
+                <span class="project-title">Project 15</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Projeect15/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Projeect15/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Projeect15/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 16">
+            <div class="project-header">
+                <span class="project-title">Project 16</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project16/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project16/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 17">
+            <div class="project-header">
+                <span class="project-title">Project 17</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="project17/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="project17/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="project17/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 18">
+            <div class="project-header">
+                <span class="project-title">Project 18</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project18/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project18/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project18/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 19">
+            <div class="project-header">
+                <span class="project-title">Project 19</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project19/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project19/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project19/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-type="project" data-name="Project 20">
+            <div class="project-header">
+                <span class="project-title">Project 20</span>
+                <span class="project-type">Project</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Loading...</span>
+                </div>
+                <iframe src="Project20/index.html" onload="hideLoading(this)"></iframe>
+            </div>
+            <div class="project-footer">
+                <a href="Project20/index.html" target="_blank" class="open-btn">Open in New Tab</a>
+                <a href="Project20/README.md" target="_blank" class="open-btn">View README</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hideLoading(iframe) {
+            const container = iframe.parentElement;
+            const loading = container.querySelector('.loading');
+            if (loading) {
+                loading.style.display = 'none';
+            }
+        }
+
+        function filterProjects(type) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (type === 'all') {
+                    card.style.display = 'block';
+                } else if (card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search functionality with Enter key support
+        const searchInput = document.getElementById('searchInput');
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = e.target.value.trim().toLowerCase();
+                showSpecificProject(searchTerm);
+            }
+        });
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            // If search is cleared, show all projects
+            if (searchTerm === '') {
+                clearSelection();
+                return;
+            }
+            
+            const cards = document.querySelectorAll('.project-card');
+            
+            cards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        function showSpecificProject(searchTerm) {
+            const cards = document.querySelectorAll('.project-card');
+            let matchedCard = null;
+            
+            // Find exact or partial match
+            cards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                if (name === searchTerm || name.includes(searchTerm)) {
+                    if (!matchedCard || name === searchTerm) {
+                        matchedCard = card;
+                    }
+                }
+            });
+            
+            if (matchedCard) {
+                // Hide the main container and show selected view
+                document.getElementById('projectsContainer').style.display = 'none';
+                document.querySelector('.filter-section').style.display = 'none';
+                
+                const selectedView = document.getElementById('selectedView');
+                const selectedProject = document.getElementById('selectedProject');
+                
+                // Clone the matched card and display it larger
+                const clonedCard = matchedCard.cloneNode(true);
+                clonedCard.style.maxWidth = '900px';
+                clonedCard.style.margin = '0 auto';
+                
+                // Make iframe taller for better view
+                const iframeContainer = clonedCard.querySelector('.iframe-container');
+                iframeContainer.style.height = '600px';
+                
+                selectedProject.innerHTML = '';
+                selectedProject.appendChild(clonedCard);
+                selectedView.style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert('No matching project or lecture found. Try "Lecture 8" or "Project 1"');
+            }
+        }
+
+        function clearSelection() {
+            document.getElementById('selectedView').style.display = 'none';
+            document.getElementById('projectsContainer').style.display = 'grid';
+            document.querySelector('.filter-section').style.display = 'block';
+            document.getElementById('searchInput').value = '';
+            
+            // Reset all cards to visible
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            // Reset filter to "All"
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[0].classList.add('active');
+        }
+
+        // Add smooth scroll animation
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 50);
+            });
+        });
+    </script>
+</body>
+</html>
