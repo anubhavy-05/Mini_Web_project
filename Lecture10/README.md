@@ -2,6 +2,10 @@
 
 A pure CSS 3D shopping cart scene with animated rotation, floating effect, and spinning wheels — no JavaScript required.
 
+## 🌐 Live Preview
+
+**[View Live Demo](https://anubhavy-05.github.io/Mini_Web_project/Lecture10/index.html)**
+
 ## ✨ Features
 
 - Pure CSS 3D model using transform-style: preserve-3d

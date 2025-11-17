@@ -2,6 +2,10 @@
 
 A pure CSS 3D flip card animation with no JavaScript required. This project demonstrates advanced CSS transforms, transitions, and 3D perspective effects.
 
+## 🌐 Live Preview
+
+**[View Live Demo](https://anubhavy-05.github.io/Mini_Web_project/Lecture8/index.html)**
+
 ## ✨ Features
 
 - **Pure CSS Animation** - No JavaScript dependencies

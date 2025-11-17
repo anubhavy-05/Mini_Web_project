@@ -2,6 +2,10 @@
 
 A tiny, dependency‑free HTML/CSS animation of a flower that grows a stem and blooms with 8 petals.
 
+## 🌐 Live Preview
+
+**[View Live Demo](https://anubhavy-05.github.io/Mini_Web_project/Lecture12/index.html)**
+
 ## How to run
 
 - Open `index.html` in your browser. No build steps required.
