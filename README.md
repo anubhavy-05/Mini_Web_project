@@ -1,8 +1,14 @@
-#  Mini Web Projects Collection
+# 🚀 Mini Web Projects Collection
 
 A comprehensive collection of web development projects and lectures showcasing HTML, CSS, and JavaScript skills.
 
-##  Overview
+## 🌐 Live Demo
+
+**[View Live Dashboard](https://anubhavy-05.github.io/Mini_Web_project/live-view.html)**
+
+Browse all projects with live previews, search functionality, and easy navigation!
+
+## 📋 Overview
 
 This repository contains 14 projects and 6 lectures covering various web development concepts, from basic HTML/CSS to advanced JavaScript interactivity.
 
@@ -38,20 +44,20 @@ Access all projects and lectures through our interactive dashboard:
 - **Lecture 13** - Advanced JavaScript
 
 ### Projects
-- **Project 1** - Simple Calculator
-- **Project 2** - Traffic Light Simulator
-- **Project 3** - Glass Morphism Navbar
-- **Project 4** - [View project for details]
-- **Project 5** - [View project for details]
-- **Project 6** - [View project for details]
-- **Project 7** - [View project for details]
-- **Project 14** - [View project for details]
-- **Project 15** - [View project for details]
-- **Project 16** - [View project for details]
-- **Project 17** - [View project for details]
-- **Project 18** - [View project for details]
-- **Project 19** - [View project for details]
-- **Project 20** - [View project for details]
+- **[Project 1 - Simple Calculator](https://anubhavy-05.github.io/Mini_Web_project/Project1/index.html)** - Interactive calculator
+- **[Project 2 - Traffic Light Simulator](https://anubhavy-05.github.io/Mini_Web_project/Project2/index.html)** - Traffic light animation
+- **[Project 3 - Glass Morphism Navbar](https://anubhavy-05.github.io/Mini_Web_project/Project3/index.html)** - Modern glassmorphism design
+- **[Project 4](https://anubhavy-05.github.io/Mini_Web_project/Project4/inde.html)** - [View live]
+- **[Project 5](https://anubhavy-05.github.io/Mini_Web_project/Project5/index.html)** - [View live]
+- **[Project 6](https://anubhavy-05.github.io/Mini_Web_project/Project6/index.html)** - [View live]
+- **[Project 7](https://anubhavy-05.github.io/Mini_Web_project/Project7/index.html)** - [View live]
+- **[Project 14](https://anubhavy-05.github.io/Mini_Web_project/Project14/index.html)** - [View live]
+- **[Project 15](https://anubhavy-05.github.io/Mini_Web_project/Projeect15/index.html)** - [View live]
+- **[Project 16](https://anubhavy-05.github.io/Mini_Web_project/Project16/index.html)** - [View live]
+- **[Project 17](https://anubhavy-05.github.io/Mini_Web_project/project17/index.html)** - [View live]
+- **[Project 18](https://anubhavy-05.github.io/Mini_Web_project/Project18/index.html)** - [View live]
+- **[Project 19](https://anubhavy-05.github.io/Mini_Web_project/Project19/index.html)** - [View live]
+- **[Project 20](https://anubhavy-05.github.io/Mini_Web_project/Project20/index.html)** - [View live]
 
 ##  Technologies Used
 
